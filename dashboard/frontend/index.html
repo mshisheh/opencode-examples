@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="app-name">Data Dashboard</span>
+    <button class="back-btn" id="backBtn" style="display:none" onclick="showUploadPage()">&larr; Uploads</button>
+    <span class="dataset-name" id="datasetName"></span>
+    <button class="chat-toggle-btn" id="chatToggleBtn" style="display:none" onclick="toggleChat()">Chat</button>
+  </nav>
+
+  <div class="main-container">
+    <!-- Upload Page -->
+    <div class="upload-page" id="uploadPage">
+      <h2>Upload Your Data</h2>
+      <p class="sub">Drag & drop a CSV file or click to browse</p>
+      <div class="drop-zone" id="dropZone">
+        <span class="icon">&#128196;</span>
+        <p>Drag & drop your CSV here, or <span class="browse-link" onclick="document.getElementById('fileInput').click()">browse</span></p>
+      </div>
+      <input type="file" id="fileInput" accept=".csv" style="display:none">
+      <div class="upload-progress" id="uploadProgress">
+        <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+        <span class="progress-text" id="progressText">Uploading...</span>
+      </div>
+      <div class="file-list" id="fileList">
+        <h3>Uploaded Datasets</h3>
+        <div id="fileListContainer"></div>
+      </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout" id="dashboardLayout">
+      <div class="dashboard-sidebar" id="dashboardSidebar">
+        <button class="tab-btn active" data-tab="info" onclick="switchTab('info')">Info</button>
+        <button class="tab-btn" data-tab="stats" onclick="switchTab('stats')">Statistics</button>
+        <button class="tab-btn" data-tab="plots" onclick="switchTab('plots')">Plots</button>
+      </div>
+      <div class="dashboard-content" id="dashboardContent">
+        <div class="tab-content active" id="tabInfo"></div>
+        <div class="tab-content" id="tabStats"></div>
+        <div class="tab-content" id="tabPlots"></div>
+      </div>
+
+      <!-- Chat Panel -->
+      <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+          <h3>Chat</h3>
+          <button class="chat-toggle-btn" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+          <input type="text" id="chatInput" placeholder="Ask about your data..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <button class="send-btn" id="sendBtn" onclick="sendChatMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
